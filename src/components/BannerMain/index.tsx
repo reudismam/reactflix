@@ -1,8 +1,10 @@
 import React from 'react';
 import VideoIframeResponsive from './components/VideoIframeResponsive';
-import { BannerMainContainer, ContentAreaContainer, WatchButton } from './styles';
+import { BannerMainContainer, ContentAreaContainer, ContentAreaContainerCategory, 
+  ContentAreaContainerDescription, ContentAreaContainerItem, ContentAreaContainerTitle, WatchButton } from './styles';
+import { stringify } from 'querystring';
 
-function getYouTubeId(youtubeURL) {
+function getYouTubeId(youtubeURL: string) {
   return youtubeURL
     .replace(
       /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/,
@@ -10,35 +12,41 @@ function getYouTubeId(youtubeURL) {
     );
 }
 
+interface Banner {
+  videoTitle: string,
+  videoDescription: string,
+  url: string
+}
+
 export default function BannerMain({
   videoTitle,
   videoDescription,
   url,
-}) {
+}: Banner) {
   const youTubeID = getYouTubeId(url);
   const bgUrl = `https://img.youtube.com/vi/${youTubeID}/maxresdefault.jpg`;
 
   return (
-    <BannerMainContainer backgroundImage={bgUrl}>
+    <BannerMainContainer>
       <ContentAreaContainer>
-        <ContentAreaContainer.Item>
-          <ContentAreaContainer.Title>
+        <ContentAreaContainerItem>
+          <ContentAreaContainerTitle>
             {videoTitle}
-          </ContentAreaContainer.Title>
+          </ContentAreaContainerTitle>
 
-          <ContentAreaContainer.Description>
+          <ContentAreaContainerDescription>
             {videoDescription}
-          </ContentAreaContainer.Description>
-        </ContentAreaContainer.Item>
+          </ContentAreaContainerDescription>
+        </ContentAreaContainerItem>
 
-        <ContentAreaContainer.Item>
+        <ContentAreaContainerItem>
           <VideoIframeResponsive
             youtubeID={youTubeID}
           />
           <WatchButton>
             Assistir
           </WatchButton>
-        </ContentAreaContainer.Item>
+        </ContentAreaContainerItem>
       </ContentAreaContainer>
     </BannerMainContainer>
   );

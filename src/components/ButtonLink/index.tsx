@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 interface Props {
     className: string,
@@ -9,9 +10,9 @@ interface Props {
 function ButtonLink(props: Props) {
     return (
         <div>
-        <a href={props.href} className={props.className}>
+        <Link to={props.href} className={props.className}>
             {props.children}
-        </a>
+        </Link>
         </div>
     );
 }

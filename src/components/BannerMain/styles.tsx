@@ -15,7 +15,7 @@ export const ContentAreaContainer = styled.section`
   }
 `;
 
-ContentAreaContainer.Item = styled.div`
+export const ContentAreaContainerItem = styled.div`
   width: 50%;
   display: inline-block;
   margin-bottom: 50px;
@@ -24,7 +24,7 @@ ContentAreaContainer.Item = styled.div`
   }
 `;
 
-ContentAreaContainer.Category = styled.h1`
+export const ContentAreaContainerCategory = styled.h1`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -45,13 +45,13 @@ ContentAreaContainer.Category = styled.h1`
   }
 `;
 
-ContentAreaContainer.Description = styled.p`
+export const ContentAreaContainerDescription = styled.p`
   @media (max-width: 800px) {
     display: none;
   }
 `;
 
-ContentAreaContainer.Title = styled.h2`
+export const ContentAreaContainerTitle = styled.h2`
   font-style: normal;
   font-weight: 300;
   font-size: 40px;
@@ -69,7 +69,7 @@ export const BannerMainContainer = styled.section`
   height: 80vh;
   position: relative;
   color: #fff;
-  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`}; 
+  background-image: 'https://picsum.photos/200/300'; 
   background-size: cover;
   background-position: center;
   @media (max-width: 800px) {

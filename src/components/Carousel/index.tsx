@@ -1,11 +1,35 @@
 import React from 'react';
 import { VideoCardGroupContainer, VideoCardList, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
+import dadosIniciais from '../../data/dados_iniciais.json';
+
+/*interface Video {
+  titulo: string,
+  url: string
+}
+
+interface LinkExtra {
+  url: string,
+  text: string
+}
+
+interface Category {
+  titulo: string,
+  cor: string,
+  link_extra: LinkExtra,
+  videos: Video []
+}
+*/
+interface VideoCard {
+  ignoreFirstVideo: boolean,
+  videocategory: number,
+}
 
 function VideoCardGroup({
   ignoreFirstVideo,
-  category,
-}) {
+  videocategory,
+}: VideoCard) {
+  const category = dadosIniciais.categorias[videocategory]; 
   const categoryTitle = category.titulo;
   const categoryColor = category.cor;
   const categoryExtraLink = category.link_extra;
