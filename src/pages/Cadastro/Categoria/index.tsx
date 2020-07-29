@@ -7,9 +7,24 @@ export default function CadastroCategoria() {
       <PageDefault>
         <h1>Página de Cadastro de Categorias</h1>
 
-        <Link to="/">
-          Ir para home
-        </Link>
+        <form>
+
+        <label>
+          Nome da Categoria:
+          <input
+            type="text"
+          />
+        </label>
+
+        <button>
+          Cadastrar
+        </button>
+      </form>
+
+
+      <Link to="/">
+        Ir para home
+      </Link>
       </PageDefault>
     );
   }
