@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PageDefault from '../../PageDefault'
 import FormField from '../../../components/FormField'
 import { Link } from 'react-router-dom'
+import ButtonLink from '../../../components/ButtonLink';
 
 interface Categoria {
+  id: number,
   nome: string,
   descricao: string,
   cor: string
@@ -11,6 +13,7 @@ interface Categoria {
 
 export default function CadastroCategoria() {
   const valoresIniciais = {
+    id: 0,
     nome: '',
     descricao: '',
     cor: ''
@@ -33,6 +36,39 @@ export default function CadastroCategoria() {
       [e.target.name]:e.target.value
       });
   }
+
+    useEffect(() => {
+      console.log('USE EFFECT');
+
+      const URL = "http://localhost:8080/categorias"
+      fetch(URL)
+      .then(async (response) => {
+        const resposta = await response.json();
+        console.log(resposta);
+        setCategorias([
+          ...resposta
+        ]);
+      });
+
+      /*setTimeout(() => {
+        setCategorias([
+          {
+            "id": 1,
+            "nome": "Front-End",
+            "descricao": "Aventura",
+            "cor": "#cbcbff"
+            },
+            {
+            "id": 1,
+            "nome": "Front-End",
+            "descricao": "Aventura",
+            "cor": "#cbcbff"
+            }
+        ]
+        );
+      }, 4 * 1000);*/
+    },
+    [categoria.nome]);
     //console.log(categoria.nome);
     return (
       <PageDefault>
@@ -76,10 +112,19 @@ export default function CadastroCategoria() {
         </div>
         
 
-        <button>
+        <ButtonLink
+          className="ButtonLink"
+          href="/"
+        >
           Cadastrar
-        </button>
+        </ButtonLink>
       </form>
+      {categorias.length === 0 &&
+      <div>
+        {/* Carregando ... */}
+        Loading ...
+      </div>
+      }
 
       <ul>
         {categorias.map((categoria, indice) => {
