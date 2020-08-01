@@ -1,36 +1,20 @@
 import React from 'react';
 import { VideoCardGroupContainer, VideoCardList, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
-import dadosIniciais from '../../data/dados_iniciais.json';
+//import dadosIniciais from '../../data/dados_iniciais.json';
 import Slider, { SliderItem } from '../Slider';
+import Category from '../../objects/Category';
+import VideoCardType from '../../objects/VideoCard';
+import Categoria from '../../objects/Category';
 
-/*interface Video {
-  titulo: string,
-  url: string
-}
-
-interface LinkExtra {
-  url: string,
-  text: string
-}
-
-interface Category {
-  titulo: string,
-  cor: string,
-  link_extra: LinkExtra,
-  videos: Video []
-}
-*/
-interface VideoCard {
+interface MyVideo {
   ignoreFirstVideo: boolean,
   videocategory: number,
+  dadosIniciais: Array<Categoria>
 }
 
-function Carousel({
-  ignoreFirstVideo,
-  videocategory,
-}: VideoCard) {
-  const category = dadosIniciais.categorias[videocategory]; 
+function Carousel({ignoreFirstVideo, videocategory, dadosIniciais}:MyVideo) {
+  const category = dadosIniciais[videocategory]; 
   const categoryTitle = category.titulo;
   const categoryColor = category.cor;
   const categoryExtraLink = category.link_extra;

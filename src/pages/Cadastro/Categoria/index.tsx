@@ -3,13 +3,8 @@ import PageDefault from '../../PageDefault'
 import FormField from '../../../components/FormField'
 import { Link } from 'react-router-dom'
 import ButtonLink from '../../../components/ButtonLink';
-
-interface Categoria {
-  id: number,
-  nome: string,
-  descricao: string,
-  cor: string
-}
+import useForm from '../../../forms/useform';
+import Categoria from '../../../forms/Categoria';
 
 export default function CadastroCategoria() {
   const valoresIniciais = {
@@ -18,29 +13,16 @@ export default function CadastroCategoria() {
     descricao: '',
     cor: ''
   }
+  
+  const {categoria, setValue, setValueTextArea, clearForm} = useForm(valoresIniciais);
     const [categorias, setCategorias] = useState<Categoria[]>([]);
-    
-    const [categoria, setCategoria] = useState<Categoria>(valoresIniciais);
-
-    function setValue(e: React.ChangeEvent<HTMLInputElement>){
-      const {name, value} = e.target;  
-      setCategoria({
-          ...categoria,
-        [name]: value
-        });
-    }
-
-    function setValueTextArea(e: React.ChangeEvent<HTMLTextAreaElement>){
-      setCategoria({
-        ...categoria,
-      [e.target.name]:e.target.value
-      });
-  }
-
+  
     useEffect(() => {
       console.log('USE EFFECT');
 
-      const URL = "http://localhost:8080/categorias"
+      const URL = window.location.hostname.includes('localhost')
+      ? "http://localhost:8080/categorias"
+      : "site de producao"
       fetch(URL)
       .then(async (response) => {
         const resposta = await response.json();
@@ -80,7 +62,7 @@ export default function CadastroCategoria() {
           setCategorias([
             ...categorias, categoria
           ]);
-          setCategoria(valoresIniciais)
+          clearForm()
         }}>
         
         <FormField
@@ -112,12 +94,12 @@ export default function CadastroCategoria() {
         </div>
         
 
-        <ButtonLink
-          className="ButtonLink"
-          href="/"
+        <button
+          //className="ButtonLink"
+          //href="/"
         >
           Cadastrar
-        </ButtonLink>
+        </button>
       </form>
       {categorias.length === 0 &&
       <div>
