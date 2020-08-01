@@ -1,7 +1,7 @@
 import React, { Children, Component } from 'react';
 import Menu from '../../components/Menu';
 import Footer from '../../components/Footer';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const Main = styled.main`
     background-color: var(--black);
@@ -10,6 +10,9 @@ const Main = styled.main`
     padding-top: 50px;
     padding-left: 5%5%;
     padding-right: 5%;
+    /*${(paddingAll: any) => css`
+        padding: &{paddingAll};
+    `}*/
 `
 
 interface Props {

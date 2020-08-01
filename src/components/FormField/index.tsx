@@ -70,13 +70,15 @@ interface Props {
     name: string
     type: string
     label: string
+    suggestions: string[]
 }
 
-export default function FormField({value, onChange, name, type, label}: Props) {
+export default function FormField({value, onChange, name, type, label, suggestions}: Props) {
   const fieldId = `id_${name}`  
   const tag = type === 'textarea' ? 'textarea' : 'input'
 
   const hasValue = Boolean(value.length);
+  const hasSuggestions = Boolean(suggestions.length)
   return (
         <FormFieldWrapper>
           <Label
@@ -88,10 +90,25 @@ export default function FormField({value, onChange, name, type, label}: Props) {
               name={name}
               value= {value}
               onChange={onChange}
+              autoComplete={hasSuggestions ? 'off' : 'on'}
+              list={hasSuggestions ? `suggestionFor_${fieldId}`: undefined}
             />
             <LabelText>
             {label}
             </LabelText>   
+            {hasSuggestions && 
+            <datalist id={`suggestionFor_option${fieldId}`}>
+              {
+                suggestions.map((suggestion) => {
+                  return(
+                    <option value={suggestion} key={`suggestionFor_option${fieldId}`}>
+                      {suggestion}
+                    </option>
+                  );
+                })
+              }
+              
+            </datalist>}
           </Label>
          </FormFieldWrapper>
     );

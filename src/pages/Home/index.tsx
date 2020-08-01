@@ -23,33 +23,43 @@ function App() {
       console.log(err.message);
     });
   },
-  [dadosIniciais]);
+  []);
 
-  if (dadosIniciais.length) {
-    console.log(dadosIniciais)
-    return (
-      <PageDefault>
+  return (
+    <PageDefault> 
         <Menu />
-        <BannerMain
-          videoTitle={dadosIniciais[0].videos[0].titulo}
-          url={dadosIniciais[0].videos[0].url}
-          videoDescription={"O que é front-end"}
-        />
-        <Carousel
-          ignoreFirstVideo
-          videocategory = {0}
-          dadosIniciais={dadosIniciais}
-        />
-      </PageDefault>
-    );
-  }
-  else {
-    return (
-    <div>
 
-    </div>
-    );
-  }
+        {dadosIniciais.length && (<div></div>)}
+        
+        {dadosIniciais.map((categoria, indice) => {
+            if (indice == 0) {
+              return (
+                <div key={indice}>
+                    <BannerMain
+                      videoTitle={dadosIniciais[0].videos[0].titulo}
+                      url={dadosIniciais[0].videos[0].url}
+                      videoDescription={"O que é front-end"}
+                    />
+                    <Carousel
+                      ignoreFirstVideo
+                      videocategory = {0}
+                      dadosIniciais={dadosIniciais}
+                    />
+              </div>
+              );
+            }
+
+            return (
+              <Carousel
+                      ignoreFirstVideo={false}
+                      videocategory = {indice}
+                      dadosIniciais={dadosIniciais}
+              />
+            );
+        })}
+          
+  </PageDefault>
+  );
 }
 
 export default App;

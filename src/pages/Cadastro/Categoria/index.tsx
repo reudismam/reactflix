@@ -31,24 +31,6 @@ export default function CadastroCategoria() {
           ...resposta
         ]);
       });
-
-      /*setTimeout(() => {
-        setCategorias([
-          {
-            "id": 1,
-            "nome": "Front-End",
-            "descricao": "Aventura",
-            "cor": "#cbcbff"
-            },
-            {
-            "id": 1,
-            "nome": "Front-End",
-            "descricao": "Aventura",
-            "cor": "#cbcbff"
-            }
-        ]
-        );
-      }, 4 * 1000);*/
     },
     [categoria.nome]);
     //console.log(categoria.nome);
